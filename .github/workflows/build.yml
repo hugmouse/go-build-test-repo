@@ -14,7 +14,11 @@ jobs:
         goarch: [amd64, arm64]
         exclude:
           - goarch: arm64
-            goos: [windows, dragonfly, plan9]
+            goos: windows
+          - goarch: arm64
+            goos: dragonfly
+          - goarch: arm64
+            goos: plan9
     steps:
     - uses: actions/checkout@v2
     - uses: wangyoucao577/go-release-action@v1.29
@@ -24,3 +28,4 @@ jobs:
         goarch: ${{ matrix.goarch }}
         binary_name: "test"
         extra_files: LICENSE README.md
+        ldflags: "-s -w"
